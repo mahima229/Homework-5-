@@ -1,0 +1,69 @@
+---
+title: "Homework 5 413"
+author: "Mahima Palamanda"
+date: "3/2/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+Stockreturns <- c(-8.36, 1.63, -2.27, -2.93, -2.70,
+-2.93, -9.14, -2.64, 6.82, -2.35,
+-3.58, 6.13, 7.00, -15.25, -8.66,
+-1.03, -9.16, -1.25, -1.22, -10.27,
+-5.11, -0.80, -1.44, 1.28, -0.65,
+4.34, 12.22, -7.21, -0.09, 7.34,
+5.04, -7.24, -2.14, -1.01, -1.41,
+12.03, -2.53, 4.33, 1.35)
+Stockreturns
+```
+```{r}
+#Question 1
+mean(Stockreturns)
+```
+```{r}
+#Question 2
+sd(Stockreturns)
+```
+```{r}
+#Question 3
+pnorm(-1.5, -1.124615,5.977673)
+```
+47.5% are less than -1.5 assuming normal distribution 
+```{r}
+#Question 4
+qnorm(.7,-1.124615,5.977673)
+```
+70% of them were below the 2% return
+```{r}
+#Question 5
+qnorm(.25,-1.124615,5.977673)#using the normal assumption
+quantile(Stockreturns,probs=.25)#using data 
+```
+```{r}
+#Question 6
+ggplot(mapping = aes(y=Stockreturns))+
+  geom_boxplot()
+ggplot(mapping=aes(sample=Stockreturns))+stat_qq()
+```
+The data is approximately normal. The boxplot looks symmetric. The QQ plot came out to be a straight line.  
+
+#Question 7
+mu is the average return of the population the sample came from. 
+h0: mu is greater than or equal to 0.95%
+ha: mu is less than 0.95%
+if it rejects, then we can conclude that this is less than average
+
+```{r}
+#Question 8
+t.test(Stockreturns,alternative="less",mu=.95)#one-tail
+```
+The p value is 0.01827. 
+The confidence interval is -inf to .4891698
+
+#Question 9
+In conclusion, the broker is performing at less than average. At a 5% level of significance, we can reject the null hypothesis. The upper end of the confidence level is less than .95% which means we can reject the null hypothesis. 
